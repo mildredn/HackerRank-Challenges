@@ -1,0 +1,60 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static String timeCompare(String t1, String t2){
+        // Complete this function
+        if(t1.substring(t1.length() - 2).compareTo(t2.substring(t2.length() - 2)) != 0 )
+        {
+            if(t1.substring(t1.length()-2).compareTo("AM")==0)
+                return "First";
+            else
+                if(t2.substring(t2.length()-2).compareTo("AM")==0)
+                return "Second";
+        }   
+        else{
+            int t1_hours = Integer.parseInt(t1.substring(0,2));
+            int t2_hours = Integer.parseInt(t2.substring(0,2));
+            int t1_mins = Integer.parseInt(t1.substring(3,5));
+            int t2_mins = Integer.parseInt(t2.substring(3,5));
+            //System.out.println(t1_hours+" "+t2_hours+" "+t1_mins+" "+t2_mins);
+            if(t1_hours == 12)
+                t1_hours = 0;
+            if(t2_hours == 12)
+                t2_hours = 0;
+            //System.out.println(t1_hours+" "+t2_hours+" "+t1_mins+" "+t2_mins);
+            if(t1_hours < t2_hours){
+                return "First";
+            }
+            else{
+                if(t1_hours > t2_hours){
+                    return "Second";
+                }
+                else{
+                    if(t1_hours == t2_hours){
+                        if(t1_mins < t2_mins)
+                            return "First";
+                        else
+                            return "Second";    
+                    }    
+                }
+            }      
+        }  
+        return "None";
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int q = in.nextInt();
+        for(int a0 = 0; a0 < q; a0++){
+            String t1 = in.next();
+            String t2 = in.next();
+            String result = timeCompare(t1, t2);
+            System.out.println(result);
+        }
+    }
+}
